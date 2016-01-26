@@ -1,0 +1,15 @@
+[package]
+name = "boolinator"
+version = "0.1.0"
+authors = ["Daniel Keep <daniel.keep@gmail.com>"]
+
+description = "Provides the Boolinator trait, which lets you use Option and Result-style combinators with bools."
+repository = "https://github.com/DanielKeep/rust-boolinator"
+documentation = "https://danielkeep.github.io/rust-boolinator/doc/boolinator/index.html"
+readme = "README.md"
+keywords = ["bool", "combinator", "monad", "serious"]
+license = "MIT/Apache-2.0"
+
+exclude = [
+    "update-docs.py",
+]
