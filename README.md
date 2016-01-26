@@ -4,9 +4,9 @@ Provides the `Boolinator` trait, which lets you use `Option` and `Result`-style 
 
 **Links**
 
-* [Latest Release](https://crates.io/crates/scan-rules/)
-* [Latest Docs](https://danielkeep.github.io/rust-scan-rules/doc/scan_rules/index.html)
-* [Repository](https://github.com/DanielKeep/rust-scan-rules)
+* [Latest Release](https://crates.io/crates/boolinator/)
+* [Latest Docs](https://danielkeep.github.io/rust-boolinator/doc/boolinator/index.html)
+* [Repository](https://github.com/DanielKeep/rust-boolinator)
 
 ## Compatibility
 
