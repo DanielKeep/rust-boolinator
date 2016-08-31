@@ -11,5 +11,5 @@ keywords = ["bool", "combinator", "monad", "serious"]
 license = "MIT/Apache-2.0"
 
 exclude = [
-    "update-docs.py",
+    "scripts/*",
 ]
