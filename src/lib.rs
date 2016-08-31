@@ -87,6 +87,17 @@ pub trait Boolinator: Sized {
     where F: FnOnce() -> T, G: FnOnce() -> E;
 
     /**
+    If this value is `true`, returns `Ok(())`; `Err(err)` otherwise.
+    */
+    fn ok_or<E>(self, err: E) -> Result<(), E>;
+
+    /**
+    If this value is `true`, returns `Ok(())`; `Err(err())` otherwise.
+    */
+    fn ok_or_else<E, G>(self, err: G) -> Result<(), E>
+    where G: FnOnce() -> E;
+
+    /**
     Panics with `msg` if this value is `false`, otherwise it does nothing.
     */
     fn expect(self, msg: &str);
@@ -123,6 +134,15 @@ impl Boolinator for bool {
     fn as_result_from<T, E, F, G>(self, ok: F, err: G) -> Result<T, E>
     where F: FnOnce() -> T, G: FnOnce() -> E {
         if self { Ok(ok()) } else { Err(err()) }
+    }
+
+    fn ok_or<E>(self, err: E) -> Result<(), E> {
+        if self { Ok(()) } else { Err(err) }
+    }
+
+    fn ok_or_else<E, G>(self, err: G) -> Result<(), E>
+    where G: FnOnce() -> E {
+        if self { Ok(()) } else { Err(err()) }
     }
     
     #[inline]
@@ -195,6 +215,24 @@ mod tests {
         // Code good.
         assert_eq!(true.as_result_from(|| "four space indent", || "anything else"), Ok("four space indent"));
         assert_eq!(false.as_result_from(|| "four space indent", || "anything else"), Err("anything else"));
+    }
+
+    #[test]
+    fn test_ok_or() {
+        // Ok.
+        let mut annie = true;
+        assert_eq!(annie.ok_or("hit back"), Ok(()));
+        annie = false;
+        assert_eq!(annie.ok_or("hit back"), Err("hit back"));
+    }
+
+    #[test]
+    fn test_ok_or_else() {
+        // Ok.
+        let mut annie = true;
+        assert_eq!(annie.ok_or_else(|| "hit back"), Ok(()));
+        annie = false;
+        assert_eq!(annie.ok_or_else(|| "hit back"), Err("hit back"));
     }
 
     const DREAMS: &'static str = "love and financial security";
