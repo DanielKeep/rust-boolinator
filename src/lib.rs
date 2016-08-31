@@ -109,37 +109,45 @@ impl Boolinator for bool {
         if self { Some(()) } else { None }
     }
 
+    #[inline]
     fn as_some<T>(self, some: T) -> Option<T> {
         if self { Some(some) } else { None }
     }
 
+    #[inline]
     fn as_some_from<T, F>(self, some: F) -> Option<T>
     where F: FnOnce() -> T {
         if self { Some(some()) } else { None }
     }
 
+    #[inline]
     fn and_option<T>(self, opt: Option<T>) -> Option<T> {
         if self { opt } else { None }
     }
 
+    #[inline]
     fn and_option_from<T, F>(self, opt: F) -> Option<T>
     where F: FnOnce() -> Option<T> {
         if self { opt() } else { None }
     }
 
+    #[inline]
     fn as_result<T, E>(self, ok: T, err: E) -> Result<T, E> {
         if self { Ok(ok) } else { Err(err) }
     }
 
+    #[inline]
     fn as_result_from<T, E, F, G>(self, ok: F, err: G) -> Result<T, E>
     where F: FnOnce() -> T, G: FnOnce() -> E {
         if self { Ok(ok()) } else { Err(err()) }
     }
 
+    #[inline]
     fn ok_or<E>(self, err: E) -> Result<(), E> {
         if self { Ok(()) } else { Err(err) }
     }
 
+    #[inline]
     fn ok_or_else<E, G>(self, err: G) -> Result<(), E>
     where G: FnOnce() -> E {
         if self { Ok(()) } else { Err(err()) }
