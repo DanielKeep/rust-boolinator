@@ -11,5 +11,9 @@ keywords = ["bool", "combinator", "monad", "serious"]
 license = "MIT/Apache-2.0"
 
 exclude = [
+    ".gitignore",
+    ".gitmodules",
+    ".travis.yml",
+    "appveyor.yml",
     "scripts/*",
 ]
