@@ -49,7 +49,7 @@ In general, `true`/`false` map to `Some(_)`/`None` and `Ok(_)`/`Err(_)` respecti
 */
 pub trait Boolinator: Sized {
     /**
-    Converts this value into a logically equivalent `Some(())` or `None`.
+    If this value is `true`, returns `Some(())`; `None` otherwise.
     */
     fn as_option(self) -> Option<()>;
 
@@ -98,7 +98,7 @@ pub trait Boolinator: Sized {
     where G: FnOnce() -> E;
 
     /**
-    Panics with `msg` if this value is `false`, otherwise it does nothing.
+    If this value is `true`, panics with `msg`; does nothing otherwise.
     */
     fn expect(self, msg: &str);
 }
