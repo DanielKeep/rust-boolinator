@@ -1,6 +1,6 @@
 [package]
 name = "boolinator"
-version = "0.1.1"
+version = "2.4.0"
 authors = ["Daniel Keep <daniel.keep@gmail.com>"]
 
 description = "Provides the Boolinator trait, which lets you use Option and Result-style combinators with bools."
