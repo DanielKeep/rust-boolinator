@@ -98,7 +98,7 @@ pub trait Boolinator: Sized {
     where G: FnOnce() -> E;
 
     /**
-    If this value is `true`, panics with `msg`; does nothing otherwise.
+    If this value is `true`, does nothing; panics with `msg` otherwise.
     */
     fn expect(self, msg: &str);
 }
