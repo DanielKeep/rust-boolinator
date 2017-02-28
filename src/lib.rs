@@ -101,6 +101,16 @@ pub trait Boolinator: Sized {
     If this value is `true`, does nothing; panics with `msg` otherwise.
     */
     fn expect(self, msg: &str);
+
+    /**
+    If this value is `true` call f and return its value, `false` otherwise.
+    */
+    fn and_then<F>(self, f: F) -> Self where F: FnOnce() -> Self;
+
+    /**
+    If this value is `false` call f and return its value, `true` otherwise.
+    */
+    fn or_else<F>(self, f: F) -> Self where F: FnOnce() -> Self;
 }
 
 impl Boolinator for bool {
@@ -156,6 +166,14 @@ impl Boolinator for bool {
     #[inline]
     fn expect(self, msg: &str) {
         if self { () } else { panic!("{}", msg) }
+    }
+
+    fn and_then<F>(self, f: F) -> bool where F: FnOnce() -> bool {
+        if self { f() } else { self }
+    }
+
+    fn or_else<F>(self, f: F) -> bool where F: FnOnce() -> bool {
+        if self { true } else { f() }
     }
 }
 
@@ -256,5 +274,37 @@ mod tests {
     fn test_expect_reality() {
         // Send hugs.
         false.expect(DREAMS);
+    }
+
+    #[test]
+    fn test_and_then_true() {
+        let mut c = 0;
+        let r = true.and_then(&mut || { c += 1; false });
+        assert_eq!(r, false);
+        assert_eq!(c, 1);
+    }
+
+    #[test]
+    fn test_and_then_false() {
+        let mut c = 0;
+        let r = false.and_then(&mut || { c += 1; true });
+        assert_eq!(r, false);
+        assert_eq!(c, 0);
+    }
+
+    #[test]
+    fn test_or_else_true() {
+        let mut c = 0;
+        let r = true.or_else(&mut || { c += 1; false });
+        assert_eq!(r, true);
+        assert_eq!(c, 0);
+    }
+
+    #[test]
+    fn test_or_else_false() {
+        let mut c = 0;
+        let r = false.or_else(&mut || { c += 1; true });
+        assert_eq!(r, true);
+        assert_eq!(c, 1);
     }
 }
