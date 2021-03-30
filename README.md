@@ -10,7 +10,7 @@ Provides the `Boolinator` trait, which lets you use `Option` and `Result`-style 
 
 ## Compatibility
 
-`boolinator` is tested against Rust 1.0+.  *Exhaustively* so.
+`boolinator` is tested against Rust 1.36+ and can be used in `no_std`-crates.  *Exhaustively* so.
 
 ## License
 

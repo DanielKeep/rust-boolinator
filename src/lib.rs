@@ -41,6 +41,11 @@ Provides the [`Boolinator`](trait.Boolinator.html) trait, which lets you use `Op
 */
 // Can't have undocumented APIs!  Nosiree!
 #![deny(missing_docs)]
+#![no_std]
+
+#[cfg_attr(test, macro_use)]
+#[cfg(test)]
+extern crate alloc;
 
 /**
 This trait defines a number of combinator-style methods for use with `bool` values.
